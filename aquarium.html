@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Animated Aquarium with Fish Images</title>
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .aquarium {
+      position: relative;
+      width: 800px;
+      height: 400px;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 0 40px #1e88e5;
+      background: #1976d2;
+    }
+    .water-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .wave {
+      position: absolute;
+      width: 200%;
+      height: 60px;
+      left: -50%;
+      opacity: 0.7;
+      bottom: 0;
+      background: url('data:image/svg+xml;utf8,<svg width="400" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M0 30 Q 50 60 100 30 T 200 30 T 300 30 T 400 30 V60 H0Z" fill="%23b3e5fc"/></svg>') repeat-x;
+      animation: waveMove 8s linear infinite;
+    }
+    .wave.wave2 {
+      opacity: 0.5;
+      bottom: 20px;
+      animation-duration: 12s;
+      background: url('data:image/svg+xml;utf8,<svg width="400" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M0 40 Q 50 10 100 40 T 200 40 T 300 40 T 400 40 V60 H0Z" fill="%234fc3f7"/></svg>') repeat-x;
+    }
+    .wave.wave3 {
+      opacity: 0.4;
+      bottom: 40px;
+      animation-duration: 16s;
+      background: url('data:image/svg+xml;utf8,<svg width="400" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q 50 50 100 20 T 200 20 T 300 20 T 400 20 V60 H0Z" fill="%23039be5"/></svg>') repeat-x;
+    }
+    @keyframes waveMove {
+      0% { left: -50%; }
+      100% { left: 0%; }
+    }
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      opacity: 0.6;
+      z-index: 2;
+      animation: bubbleUp linear infinite;
+    }
+    @keyframes bubbleUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.6;}
+      80% { opacity: 0.8;}
+      100% { transform: translateY(-400px) scale(1.2); opacity: 0;}
+    }
+    .plant {
+      position: absolute;
+      bottom: 0;
+      z-index: 3;
+      left: 60px;
+      width: 30px;
+      height: 110px;
+      pointer-events: none;
+    }
+    .plant svg { width: 100%; height: 100%; display: block; }
+    .plant .plant-swing {
+      transform-origin: bottom center;
+      animation: plantSwing 3s ease-in-out infinite alternate;
+    }
+    .plant2 { left: 160px; width: 24px; height: 90px; }
+    .plant2 .plant-swing { animation-duration: 2.2s; }
+    .plant3 { left: 700px; width: 32px; height: 120px; }
+    .plant3 .plant-swing { animation-duration: 3.5s; }
+    .plant4 { left: 600px; width: 18px; height: 70px; }
+    .plant4 .plant-swing { animation-duration: 2.7s; }
+    @keyframes plantSwing {
+      0% { transform: rotate(-8deg);}
+      100% { transform: rotate(8deg);}
+    }
+    .fish {
+      position: absolute;
+      cursor: pointer;
+      z-index: 4;
+      user-select: none;
+      transition: filter 0.2s, opacity 0.2s;
+    }
+    .fish.stopped {
+      filter: grayscale(80%) blur(1px);
+      opacity: 0.6;
+      cursor: pointer;
+    }
+    .fish.left img {
+      transform: scaleX(-1);
+    }
+    .fish img {
+      width: 70px;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+    .fish.small img {
+      width: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="aquarium">
+    <div class="water-bg">
+      <div class="wave"></div>
+      <div class="wave wave2"></div>
+      <div class="wave wave3"></div>
+    </div>
+    <!-- Plants -->
+    <div class="plant">
+      <svg viewBox="0 0 30 110">
+        <path class="plant-swing" d="M15,110 Q5,70 15,30 Q25,10 15,0" stroke="#388e3c" stroke-width="4" fill="none"/>
+      </svg>
+    </div>
+    <div class="plant plant2">
+      <svg viewBox="0 0 24 90">
+        <path class="plant-swing" d="M12,90 Q2,60 12,20 Q22,5 12,0" stroke="#43a047" stroke-width="3" fill="none"/>
+      </svg>
+    </div>
+    <div class="plant plant3">
+      <svg viewBox="0 0 32 120">
+        <path class="plant-swing" d="M16,120 Q4,80 16,40 Q28,15 16,0" stroke="#2e7d32" stroke-width="5" fill="none"/>
+      </svg>
+    </div>
+    <div class="plant plant4">
+      <svg viewBox="0 0 18 70">
+        <path class="plant-swing" d="M9,70 Q0,50 9,20 Q18,5 9,0" stroke="#66bb6a" stroke-width="2" fill="none"/>
+      </svg>
+    </div>
+    <!-- Fish Images with explicit src paths -->
+    <div class="fish" id="fish1" style="top:60px; left:10px;">
+      <img src="C:\Users\Admin\Desktop\Aquarium\fish2.svg" alt="Fish 1">
+    </div>
+    <div class="fish left" id="fish2" style="top:150px; left:700px;">
+      <img src="C:\Users\Admin\Desktop\Aquarium\clown-fish.svg" alt="Fish 2">
+    </div>
+    <div class="fish" id="fish3" style="top:100px; left:120px;">
+      <img src="C:\Users\Admin\Desktop\Aquarium\fishes.svg" alt="Fish 3">
+    </div>
+    <div class="fish small" id="fish4" style="top:220px; left:40px;">
+      <img src="C:\Users\Admin\Desktop\Aquarium\clown-fish.svg" alt="Fish 4">
+    </div>
+    <div class="fish small left" id="fish5" style="top:270px; left:750px;">
+      <img src="C:\Users\Admin\Desktop\Aquarium\clown-fish.svg" alt="Fish 5">
+    </div>
+  </div>
+  <script>
+    // Fish configuration
+    const fishes = [
+      { id: 'fish1', speed: 1.5, direction: 1, width: 70 },
+      { id: 'fish2', speed: 1.2, direction: -1, width: 70 },
+      { id: 'fish3', speed: 2.0, direction: 1, width: 70 },
+      { id: 'fish4', speed: 2.2, direction: 1, width: 40 },
+      { id: 'fish5', speed: 1.7, direction: -1, width: 40 }
+    ];
+    const tankWidth = 800;
+    let fishStates = {};
+
+    fishes.forEach(fish => {
+      const elem = document.getElementById(fish.id);
+      fishStates[fish.id] = {
+        moving: true,
+        left: parseFloat(elem.style.left),
+        direction: fish.direction
+      };
+    });
+
+    function animateFish() {
+      fishes.forEach(fish => {
+        const fishElem = document.getElementById(fish.id);
+        let state = fishStates[fish.id];
+        if (state.moving) {
+          state.left += fish.speed * fish.direction;
+          if (fish.direction === 1 && state.left > tankWidth) {
+            state.left = -fish.width;
+          }
+          if (fish.direction === -1 && state.left < -fish.width) {
+            state.left = tankWidth;
+          }
+          fishElem.style.left = state.left + 'px';
+        }
+      });
+      requestAnimationFrame(animateFish);
+    }
+    animateFish();
+
+    // Click to toggle fish movement (stop/start)
+    fishes.forEach(fish => {
+      const fishElem = document.getElementById(fish.id);
+      fishElem.addEventListener('click', () => {
+        fishStates[fish.id].moving = !fishStates[fish.id].moving;
+        fishElem.classList.toggle('stopped');
+      });
+    });
+
+    // Bubbles
+    const aquarium = document.querySelector('.aquarium');
+    function createBubble() {
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      const size = Math.random() * 18 + 8;
+      bubble.style.width = bubble.style.height = size + 'px';
+      bubble.style.left = (Math.random() * 92 + 2) + '%';
+      bubble.style.bottom = '0px';
+      bubble.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      aquarium.appendChild(bubble);
+      setTimeout(() => aquarium.removeChild(bubble), 5000);
+    }
+    setInterval(createBubble, 400);
+    for (let i = 0; i < 10; i++) setTimeout(createBubble, i * 400);
+  </script>
+</body>
+</html>
