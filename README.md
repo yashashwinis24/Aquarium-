@@ -14,5 +14,6 @@ To design and develop an interactive animated aquarium using HTML, CSS, and Java
 
 
 **Final Conclusion**
+
 The animated aquarium project successfully demonstrates how HTML, CSS, and JavaScript can be combined to create a visually engaging and interactive digital environment. Through dynamic elements such as moving fish, animated waves, rising bubbles, and responsive plant motions, the project simulates an appealing underwater world. The inclusion of user interaction—allowing fish to be stopped or restarted—enhances both functionality and user engagement. Overall, the project effectively showcases core web development concepts, creative animation techniques, and interactive design, resulting in a cohesive and immersive animation experience.
 
